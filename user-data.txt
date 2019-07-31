@@ -26,6 +26,7 @@ URL=example.com
 SUBDOMAINS=
 EXTRA_DOMAINS=
 TZ=Europe/Brussels
+POSTGRES_PASSWORD=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo '')
 EOF
 
 # set noip variables
@@ -38,9 +39,6 @@ DOMAINS='example.com'
 # Examples: 5 m, 5 h, 5 d. Minimum is 5 minutes.
 INTERVAL='5m'
 EOF
-
-# generate random password
-PASSWORD=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo '')
 
 # set permissions
 sudo chown -R centos:centos /home/centos/lightsail-drupal/
