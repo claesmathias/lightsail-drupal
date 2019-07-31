@@ -19,7 +19,7 @@ cd /home/centos/
 git clone https://github.com/claesmathias/lightsail-drupal.git
 
 # set docker-compose environment variables
-cat <<EOF >/home/centos/lightsail-htpc/.env
+cat <<EOF >/home/centos/lightsail-drupal/.env
 HOST_IP=$(hostname --ip-address)
 EMAIL=mail@example.com
 URL=example.com
