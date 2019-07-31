@@ -1,0 +1,58 @@
+version: '3.7'
+
+services:
+
+#
+# drupal
+# Drupal is an open source content management platform powering millions of websites and applications.
+#
+  drupal:
+    image: drupal:apache
+    container_name: drupal
+    restart: always
+    ports:
+      - 80
+    volumes:
+      - /var/www/html/modules
+      - /var/www/html/profiles
+      - /var/www/html/themes
+      # this takes advantage of the feature in Docker that a new anonymous
+      # volume (which is what we're creating here) will be initialized with the
+      # existing content of the image at the same location
+      - /var/www/html/sites
+    networks:
+      - app_net
+      - data_net
+    healthcheck:
+     test: ["CMD-SHELL", "curl -f http://localhost && echo 'OK'"]
+     interval: 5s
+     timeout: 2s
+     retries: 20
+
+#
+# postgres
+# The PostgreSQL object-relational database system provides reliability and data integrity.
+#
+  postgres:
+    image: postgres
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    networks:
+      - data_net
+
+#
+# network
+#
+networks:
+  data_net:
+    driver: bridge
+    ipam:
+     driver: default
+  app_net:
+    driver: bridge
+    ipam:
+     driver: default
+     config:
+      - subnet: 172.20.0.0/16
