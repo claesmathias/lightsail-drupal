@@ -20,5 +20,4 @@ You can find the script in `/var/lib/cloud/instance/user-data.txt` on the instan
 ### Open ports
 ```
 aws lightsail open-instance-public-ports --port-info fromPort=443,toPort=443,protocol=TCP --instance-name drupal-vm
-aws lightsail open-instance-public-ports --port-info fromPort=32400,toPort=32400,protocol=TCP --instance-name drupal-vm
 ```
